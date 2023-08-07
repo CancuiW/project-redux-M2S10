@@ -1,3 +1,8 @@
+{/* <Switch> 是一个用于包裹 <Route> 组件的容器。它的作用是使得在多个路由规则中，
+  只匹配第一个与当前路径匹配的 <Route> 组件。换句话说，一旦找到了匹配的路由，
+    <Switch> 就会停止继续匹配其他的路由规则。 */}
+
+
 import React from "react";
 
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -12,7 +17,7 @@ import AddMovieForm from './AddMovieForm';
 import FavoriteMovieList from './FavoriteMovieList';
 
 const App = props => {
-  const displayFavorites = true;
+  const {displayFavorites} = props;
 
   return (
     <div>
@@ -48,4 +53,10 @@ const App = props => {
   );
 };
 
-export default App;
+const mapStateToProps=state=>{
+  return {
+    
+    displayFavorites: state.favoritesReducer.displayFavorites
+  }
+}
+export default connect(mapStateToProps)(App);
